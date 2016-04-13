@@ -1,0 +1,82 @@
+Raymond Byczko
+Start: 2016-04-09 April 9, 2016
+file: gitphpmodrewrite/doc/notes.txt
+
+Apache Settings
+---------------
+
+There is two ways of getting the git info we need.
+One is to use mod_rewrite.  The other is to use a handler.
+
+First lets cover the method with mod_rewrite.
+
+http://httpd.apache.org/docs/2.4/mod/mod_rewrite.html
+
+"The mod_rewrite module uses a rule-based rewriting engine, based on a PCRE
+regular-expression parser, to rewrite requested URLs on the fly."
+
+This will work by enabled the module rewrite (a.k.a mod_rewrite)
+
+/usr/sbin/a2enmod
+
+
+Once the module is enabled, you need to invoke instructions like the
+following.  Apache is aware of contexts for its instructions.
+
+See:
+http://httpd.apache.org/docs/2.4/mod/directive-dict.html#Context
+
+Reviewing the above, we see the contexts are: server config, virtual host,
+directory, .htaccess.  For my example, I used virtual host.
+
+RewriteEngine on
+RewriteRule /*.gitsha1 /cgi-bin/gitsha1.php
+
+[ASIDE][
+working copy of virtual host file
+sudo cp learnapache.dev backup01/learnapache.dev.backup7
+][It is a working copy, that is, backup7.]
+
+If you do not enable the module rewrite, you'll get something like:
+
+Syntax error on line 21 of /etc/apache2/sites-enabled/learnapache.dev:
+Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration
+
+Here are the steps to remedy:
+1) Make sure this exists: /etc/apache2/mods-available/rewrite.load
+2) Issue: sudo a2enmod rewrite
+3) Issue: sudo service apache2 restart
+
+If you see mod_rewrite missing from the configuration you need to run the above or
+fix some errors.
+See:phpinfo_no_mod_rewrite.png
+
+
+Things to be careful of
+-----------------------
+
+1) Don't be caught off guard by running: sha1sum <file>
+The value it returns is different than that reported by git, because of the calculation involved.
+@TODO finish by including calc here.
+
+Examining the git repo
+----------------------
+
+Lets say you want to examine the git hash for each file in a certain commit.
+You suspect a change in the website and want to verify its in git.
+
+Issue: git ls-files -s
+
+This will give you perms, the git hash etc, plus the path at the end.
+
+A Better way to examine the git repo
+------------------------------------
+The object id of each commit can be examined, in reverse order.  Several initial digits
+can be recorded and then these can be applied to 'git ls-tree'.
+
+Here is the general procedure:
+
+1) git log
+2) write down initial digits
+3) git ls-tree -r <initial digit sequence>
+
