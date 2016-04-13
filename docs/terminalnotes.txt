@@ -1,0 +1,21 @@
+ 2114  git log --format=oneline
+ 2115  git ls-tree -r b74b15 --full-tree
+ 2116  git ls-tree -r b07852 --full-tree
+ 2117  git ls-tree -r cod75b --full-tree
+ 2118  git ls-tree -r c0d75b --full-tree
+ 2119  git ls-tree -r 38235c --full-tree
+ 2120  git ls-tree -r 07a6d30 --full-tree
+ 2121  git ls-tree -r ee8661 --full-tree
+ 2122  git ls-tree -r a1a8 --full-tree
+ 2123  git show a1a8:document_root/weather_current.php
+ 2124  git show ee8661:document_root/weather_current.php
+ 2125  git show ee8661:document_root/weather_current.php>e.weather_current.php
+ 2126  view e.weather_current.php
+ 2127  test_gitfind.pl --githash 9869c2
+ 2128  echo 'lets modify weather_current so its not in git'
+ 2129  test_gitfind.pl --githash 7e100
+ 2130  history
+ 2131  echo 'add this'
+ 2132  echo '(added without git support) '
+ 2133  history
+

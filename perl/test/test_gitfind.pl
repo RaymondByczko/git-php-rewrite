@@ -6,6 +6,7 @@
 # @purpose To provide support in reading from a git history.
 # @change_history 2016-04-10, RByczko, Started this file.
 # @change_history 2016-04-12, RByczko, Env var support.
+# @change_history 2016-04-13, RByczko, Removed second Log4perl init.
 
 use strict;
 use Modern::Perl;
@@ -27,7 +28,6 @@ if (!($githash)) {
     die("Error in command line-all parameters required. Usage: --githash HHHH..");
 }
 
-Log::Log4perl->init("./test_gitfind.conf");
 
 setgitlocation('/usr/bin/git');
 setverbosity(0);
