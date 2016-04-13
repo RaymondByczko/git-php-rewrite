@@ -1,9 +1,2 @@
 RewriteEngine on
-# RewriteRuleeee '/public_html/git-php-rewrite/cgi-bin/gitshamin.php'
-# RewriteRule 'git' /cgi-bin/gitsha1.php
 RewriteRule ^(.+)\.gitshamin$ /php-bin/gitshamin.php
-
-# RewriteRule /*.gitshamin /public_html/git-php-rewrite/cgi-bin/gitshamin.php
-# Action gitshamin-type /public_html/git-php-rewrite/cgi-bin/gitshamin.php
-# AddHandler gitshamin-type .gitshamin
-
